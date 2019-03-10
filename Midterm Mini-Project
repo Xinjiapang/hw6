@@ -1,0 +1,73 @@
+var balls = [];
+
+function setup() {
+  createCanvas(600, 400);
+  colorMode(RGB);
+
+  for (i = 0; i <= 30; i++) {
+    var ball = {
+      x: random(width),
+      y: random(height),
+      speed: random(1, 15),
+      changex: random(1, 15),
+      changey: random(1, 15),
+    };
+    balls.push(ball);
+  }
+}
+
+function draw() {
+  background(250);
+  noStroke();
+
+  for (var i = 0; i < balls.length; i++) {
+    ellipse(balls[i].x, balls[i].y, 50);
+    balls[i].x += balls[i].changex;
+    balls[i].y += balls[i].changey;
+
+    //check if ball is hit of right hand side of screen
+    if (balls[i].x >= width) {
+      balls[i].changex -= balls[i].speed;
+    }
+    //check if ball is hit of left hand side of screen
+    if (balls[i].x <= 0) {
+      //ball=0;
+      balls[i].changex += balls[i].speed;
+    }
+
+    //check if ball is hit bottom hand side of screen
+    if (balls[i].y >= height) {
+      //ball=0;
+      balls[i].changey -= balls[i].speed;
+    }
+    //check if ball is of top hand side of screen
+    if (balls[i].y <= 0) {
+      //ball=0;
+      balls[i].changey += balls[i].speed;
+    }
+    //change color if ball is of right hand side of screen
+    if (balls[i].y >= height) {
+      fill(0, 200, 200, 255);
+    } else {
+      fill(255, 0, 100, 100);
+    }
+    //change color if ball is of left hand side of screen  
+    if (balls[i].y <= 0) {
+      fill(0, 200, 200, 255);
+    } else {
+      fill(255, 0, 100, 100);
+    }
+    //change color if ball is of bottom hand side of screen   
+    if (balls[i].x >= width) {
+      fill(0, 200, 200, 255);
+    } else {
+      fill(255, 0, 100, 100);
+    }
+    //change color if ball is of top hand side of screen  
+    if (balls[i].x <= 0) {
+      fill(0, 200, 200, 255);
+    } else {
+      fill(255, 0, 100, 100);
+    }
+  }
+}
